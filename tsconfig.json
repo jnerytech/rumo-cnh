@@ -4,6 +4,8 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    // Node roda o script com type-stripping e exige o `.ts` no import.
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "strict": true,
     "noUncheckedIndexedAccess": true,
@@ -15,7 +17,7 @@
     "erasableSyntaxOnly": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src", "scripts", "vite.config.ts", "eslint.config.js"]
 }
