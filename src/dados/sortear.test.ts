@@ -15,6 +15,14 @@ describe('cotasPorModulo', () => {
     }
   })
 
+  it('desempata resto igual pelo número do módulo, de forma determinística', () => {
+    // Um banco com os 4 módulos do mesmo tamanho e 3 vagas: todos os restos empatam
+    // em 0,75, então as 3 sobras vão para M1, M2 e M3, nessa ordem.
+    const base = questoes[0]!
+    const equilibrado = [1, 2, 3, 4].map((m) => ({ ...base, modulo: m as 1 | 2 | 3 | 4 }))
+    expect([...cotasPorModulo(equilibrado, 3).values()]).toEqual([1, 1, 1, 0])
+  })
+
   it('banco vazio devolve zeros em vez de estourar', () => {
     expect([...cotasPorModulo([]).values()]).toEqual([0, 0, 0, 0])
   })

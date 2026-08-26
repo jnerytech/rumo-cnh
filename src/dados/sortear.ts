@@ -13,25 +13,24 @@ export function cotasPorModulo(
   questoes: readonly QuestaoFonte[],
   total = QUESTOES_NO_SIMULADO,
 ): Map<Modulo, number> {
-  const disponivel = new Map<Modulo, number>(
-    MODULOS.map((m) => [m, questoes.filter((q) => q.modulo === m).length]),
-  )
-  const soma = [...disponivel.values()].reduce((a, b) => a + b, 0)
+  const disponivel = MODULOS.map((modulo) => ({
+    modulo,
+    n: questoes.filter((q) => q.modulo === modulo).length,
+  }))
+  const soma = disponivel.reduce((s, d) => s + d.n, 0)
   if (soma === 0) return new Map(MODULOS.map((m) => [m, 0]))
 
-  const exato = MODULOS.map((m) => ((disponivel.get(m) ?? 0) * total) / soma)
-  const cotas = new Map<Modulo, number>(MODULOS.map((m, i) => [m, Math.floor(exato[i] ?? 0)]))
-  let sobra = total - [...cotas.values()].reduce((a, b) => a + b, 0)
-
-  const porResto = [...MODULOS]
-    .map((m, i) => ({ m, resto: (exato[i] ?? 0) % 1 }))
-    .sort((a, b) => b.resto - a.resto || a.m - b.m)
-  for (const { m } of porResto) {
+  const cotas = disponivel.map(({ modulo, n }) => {
+    const exato = (n * total) / soma
+    return { modulo, resto: exato % 1, cota: Math.floor(exato) }
+  })
+  let sobra = total - cotas.reduce((s, c) => s + c.cota, 0)
+  for (const c of [...cotas].sort((a, b) => b.resto - a.resto || a.modulo - b.modulo)) {
     if (sobra <= 0) break
-    cotas.set(m, (cotas.get(m) ?? 0) + 1)
+    c.cota++
     sobra--
   }
-  return cotas
+  return new Map(cotas.map((c) => [c.modulo, c.cota]))
 }
 
 /** 30 questões sem repetição, na proporção dos módulos. */
@@ -40,11 +39,10 @@ export function sortearSimulado(
   total = QUESTOES_NO_SIMULADO,
   rng: Rng = Math.random,
 ): QuestaoFonte[] {
-  const cotas = cotasPorModulo(questoes, total)
-  return MODULOS.flatMap((m) =>
+  return [...cotasPorModulo(questoes, total)].flatMap(([modulo, cota]) =>
     embaralhar(
-      questoes.filter((q) => q.modulo === m),
+      questoes.filter((q) => q.modulo === modulo),
       rng,
-    ).slice(0, cotas.get(m) ?? 0),
+    ).slice(0, cota),
   )
 }

@@ -35,6 +35,11 @@ describe('filtrar', () => {
     expect(filtrar(questoes, { temPlaca: () => true })).toHaveLength(1496)
   })
 
+  it('remove questão que pede imagem mas não tem código de placa', () => {
+    const orfa = { ...questoes[0]!, requerImagem: true, codigoPlaca: null }
+    expect(filtrar([orfa], { temPlaca: () => true })).toEqual([])
+  })
+
   it('temPlaca decide pelo código, não pela questão', () => {
     const r = filtrar(questoes, { temPlaca: (c) => c === 'R-28' })
     expect(r.filter((q) => q.requerImagem).every((q) => q.codigoPlaca === 'R-28')).toBe(true)

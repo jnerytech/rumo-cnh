@@ -10,6 +10,9 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/dados/**'],
+      // src/dados é o único módulo com exigência de cobertura (SPEC-dados, critério 10):
+      // é lógica pura, é pequena, e é onde um erro silencioso corrompe todo o resto.
+      thresholds: { branches: 100, functions: 100, lines: 100, statements: 100 },
     },
   },
 })

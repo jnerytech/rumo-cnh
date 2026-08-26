@@ -17,7 +17,10 @@ export function filtrar(questoes: readonly QuestaoFonte[], f: Filtro): QuestaoFo
     if (f.modulos && !f.modulos.includes(q.modulo)) return false
     if (f.dificuldades && !f.dificuldades.includes(q.dificuldade)) return false
     if (f.parte !== undefined && q.parte !== f.parte) return false
-    if (f.temPlaca && q.requerImagem && !f.temPlaca(q.codigoPlaca ?? '')) return false
+    if (f.temPlaca && q.requerImagem) {
+      // Questão que pede imagem sem código de placa é irrespondível: some junto.
+      if (q.codigoPlaca === null || !f.temPlaca(q.codigoPlaca)) return false
+    }
     return true
   })
 }
