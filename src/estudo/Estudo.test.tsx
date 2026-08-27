@@ -68,3 +68,54 @@ describe('Estudo', () => {
     expect(within(contador).getByText(/1496/)).toBeInTheDocument()
   })
 })
+
+describe('Estudo — teclado (critério 11)', () => {
+  it('teclas 1 a 4 respondem, igual a clicar', () => {
+    render(<Estudo />)
+    fireEvent.keyDown(window, { key: '2' })
+    expect(screen.getByTestId('comentario')).toBeInTheDocument()
+    expect(screen.getAllByTestId('opcao-correta')).toHaveLength(1)
+  })
+
+  it('cada tecla escolhe a opção correspondente', () => {
+    render(<Estudo />)
+    const textoTerceira = screen.getAllByRole('button', { name: /^[A-D]\./ })[2]!.textContent
+    fireEvent.keyDown(window, { key: '3' })
+    expect(screen.getByTestId('opcao-escolhida').textContent).toBe(textoTerceira)
+  })
+
+  it('Enter avança depois de responder', () => {
+    render(<Estudo />)
+    const antes = screen.getByTestId('enunciado').textContent
+    fireEvent.keyDown(window, { key: '1' })
+    fireEvent.keyDown(window, { key: 'Enter' })
+    expect(screen.getByTestId('enunciado').textContent).not.toBe(antes)
+  })
+
+  it('Enter antes de responder não faz nada', () => {
+    render(<Estudo />)
+    const antes = screen.getByTestId('enunciado').textContent
+    fireEvent.keyDown(window, { key: 'Enter' })
+    expect(screen.getByTestId('enunciado').textContent).toBe(antes)
+  })
+
+  it('não responde duas vezes se a tecla for repetida', () => {
+    render(<Estudo />)
+    const textoPrimeira = screen.getAllByRole('button', { name: /^[A-D]\./ })[0]!.textContent
+    fireEvent.keyDown(window, { key: '1' })
+    fireEvent.keyDown(window, { key: '4' })
+    expect(screen.getByTestId('opcao-escolhida').textContent).toBe(textoPrimeira)
+  })
+
+  it('Enter com o botão focado não pula duas questões', () => {
+    render(<Estudo />)
+    fireEvent.keyDown(window, { key: '1' })
+    const botao = screen.getByRole('button', { name: /próxima/i })
+    const antes = screen.getByTestId('enunciado').textContent
+    fireEvent.keyDown(botao, { key: 'Enter' })
+    // O handler global ignora; quem avança é o clique nativo do botão.
+    expect(screen.getByTestId('enunciado').textContent).toBe(antes)
+    fireEvent.click(botao)
+    expect(screen.getByTestId('enunciado').textContent).not.toBe(antes)
+  })
+})
