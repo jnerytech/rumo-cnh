@@ -66,3 +66,56 @@ A trilha **A** (dados) e a trilha **B** (placas) tocam arquivos disjuntos — `s
 
 `modo-estudo`, `modo-simulado`, persistência de progresso, fila de erros, deploy, e as 20 placas
 das questões autoexplicativas. Cada um entra quando tiver spec.
+
+---
+
+# Onda 2 — `modo-estudo`
+
+Consome [`SPEC-modo-estudo.md`](../SPEC-modo-estudo.md), aprovada. `modo-simulado` fica para a
+onda 3, com spec própria.
+
+## Componentes e dependências
+
+```
+C1 fila.ts (puro) ──┐
+                    ├──> C3 sessão (estado) ──> C4 tela ──> C5 teclado
+C2 persistencia.ts ─┘                                   └─> C6 filtros + contador
+                                                            C7 threshold de cobertura
+```
+
+C1 e C2 são puros, paralelos e testáveis sem UI. C3 é onde `dados`, `acervo-placas`, C1 e C2 se
+encontram — e é o único ponto do módulo que conhece os quatro.
+
+## Ordem de execução
+
+| # | Entrega | Por que aqui |
+|---|---|---|
+| C1 | `fila.ts`: `registrarResposta`, `estaDominada`, `proximaQuestao` | É a regra que define o módulo. Puro, então vai por TDD: teste antes do código |
+| C2 | `persistencia.ts`: carregar/salvar com chave versionada | Independente de C1; o caminho que importa é o de falha, não o de sucesso |
+| C3 | Estado da sessão: junta `filtrar`, `prepararQuestao`, fila e persistência | Primeiro ponto em que o módulo existe de verdade |
+| C4 | Tela: enunciado, `<Placa/>`, opções, revelar correta + comentário | Primeira fatia vertical visível; dá para estudar já aqui |
+| C5 | Teclado `1`–`4` e `Enter` | Desktop; separado de C4 para o commit fazer uma coisa só |
+| C6 | Filtros de módulo/dificuldade + contador de inéditas e pendentes | Depende de C4 estar de pé |
+| C7 | 100% de branches em `fila.ts`, threshold travado | Fecha o critério 12 |
+
+## Checkpoints
+
+1. **Depois de C1:** os critérios 1–7 e 6b passam. Em especial o 6b — filtro estreito não pode travar o estudo em `null`.
+2. **Depois de C2:** critério 8 provado com `localStorage` lançando, não só ausente. Teste com o acessor que joga exceção, simulando aba privada.
+3. **Depois de C4:** dá para estudar de verdade em `npm run dev`. Fatia vertical fechada — é o momento de você usar antes de eu seguir.
+4. **Fim da onda:** critérios 1–12, cobertura travada, build limpo.
+
+## Riscos
+
+| Risco | Impacto | Mitigação |
+|---|---|---|
+| Fila trava em `null` com filtro estreito | Estudo para de funcionar sem erro visível | Critério 6b, escrito antes do código; teste com 1, 3 e 5 candidatas |
+| `localStorage` lança em vez de só estar vazio | Tela branca no navegador do usuário | Critério 8 com acessor que lança; try/catch na leitura E na escrita |
+| Progresso corrompido por mudança de formato | Perda silenciosa do histórico | Chave versionada `:v1`; formato novo ignora o velho em vez de migrar torto |
+| Regra da fila certa no teste e errada na prática | Você estuda semanas com o algoritmo errado | Checkpoint 3: você usa antes de eu seguir para C5/C6 |
+| UI virar o escopo | Onda não fecha | C4 entrega funcional, não bonita. Polimento é decisão sua depois de usar |
+
+## Fora desta onda
+
+`modo-simulado`, cronômetro, nota, veredito ≥24/30, qualquer sincronização, e polimento visual
+além do necessário para estudar.
