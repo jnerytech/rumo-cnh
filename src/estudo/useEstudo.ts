@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { carregarQuestoes } from '../dados/carregar'
 import { filtrar, type Filtro } from '../dados/filtrar'
 import { prepararQuestao, type QuestaoPreparada } from '../dados/preparar'
@@ -34,6 +34,9 @@ export function useEstudo(filtro: FiltroEstudo): Estudo {
   const [progresso, setProgresso] = useState<Progresso>(carregarProgresso)
   const [escolha, setEscolha] = useState<number | null>(null)
   const recentes = useRef<number[]>([])
+  // Espelho do progresso para o efeito de troca de filtro não depender dele:
+  // se dependesse, sortearia uma questão nova a cada resposta.
+  const progressoAtual = useRef(progresso)
 
   const sortear = useCallback(
     (p: Progresso) => {
@@ -51,6 +54,7 @@ export function useEstudo(filtro: FiltroEstudo): Estudo {
       setEscolha(indice)
       const atualizado = registrarResposta(progresso, questao.id, indice === questao.indiceCorreto)
       setProgresso(atualizado)
+      progressoAtual.current = atualizado
       salvarProgresso(atualizado)
       // Só os primeiros DISTANCIA_MINIMA são consultados; guardar o resto é vazamento.
       recentes.current = [questao.id, ...recentes.current].slice(0, JANELA_RECENTES)
@@ -63,6 +67,19 @@ export function useEstudo(filtro: FiltroEstudo): Estudo {
     setEscolha(null)
     setQuestao(sortear(progresso))
   }, [escolha, progresso, sortear])
+
+  // Trocar o filtro muda `candidatas`, e a questão na tela pode não pertencer mais
+  // ao novo recorte. `sortear` só muda de identidade quando `candidatas` muda.
+  const primeiraMontagem = useRef(true)
+  useEffect(() => {
+    if (primeiraMontagem.current) {
+      primeiraMontagem.current = false
+      return
+    }
+    recentes.current = []
+    setEscolha(null)
+    setQuestao(sortear(progressoAtual.current))
+  }, [sortear])
 
   const contadores = useMemo<Contadores>(
     () => ({

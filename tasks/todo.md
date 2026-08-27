@@ -147,13 +147,13 @@ Spec: [`SPEC-modo-estudo.md`](../SPEC-modo-estudo.md) · Plano: [`tasks/plan.md`
   - **Checkpoint 3 do plano — você usa antes de eu seguir**
 
 ## C5 · Teclado
-- [ ] **Tarefa:** `1`–`4` respondem, `Enter`/espaço avança
+- [x] **Tarefa:** `1`–`4` respondem, `Enter`/espaço avança
   - **Aceite:** critério 11 — mesmo efeito que clicar
   - **Verificar:** `npm test`
   - **Arquivos:** `src/estudo/Estudo.tsx`, `src/estudo/Estudo.test.tsx`
 
 ## C6 · Filtros e contador
-- [ ] **Tarefa:** filtro de módulo e dificuldade + contador de inéditas e pendentes
+- [x] **Tarefa:** filtro de módulo e dificuldade + contador de inéditas e pendentes
   - **Aceite:** usa `filtrar` de `dados`; trocar filtro não zera progresso
   - **Verificar:** `npm test` + conferência no navegador
   - **Arquivos:** `src/estudo/Estudo.tsx`, `src/estudo/Filtros.tsx`
@@ -163,3 +163,20 @@ Spec: [`SPEC-modo-estudo.md`](../SPEC-modo-estudo.md) · Plano: [`tasks/plan.md`
   - **Aceite:** critério 12; regressão quebra o build
   - **Verificar:** `npm test -- --coverage`
   - **Arquivos:** `vite.config.ts`
+
+---
+
+## Onda 2 fechada — 2026-08-27
+
+7 tarefas entregues. 104 testes; `src/dados/` e `src/estudo/fila.ts` com 100% de
+branches travados no config; build limpo; suíte rodada 3x sem flutuar.
+
+Dois bugs achados por teste durante a onda, ambos corrigidos:
+
+- trocar o filtro não trocava a questão na tela, porque a questão só era sorteada
+  na inicialização e no avançar
+- o `data-testid` da opção era `opcao-correta` OU `opcao-escolhida`, nunca os
+  dois, então o teste "a resposta não pode ser trocada" passava por sorte,
+  dependendo de onde o embaralhamento tivesse posto a correta
+
+Próximo: `SPEC-modo-simulado.md` (onda 3).

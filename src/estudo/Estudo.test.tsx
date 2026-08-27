@@ -8,6 +8,8 @@ import { salvarProgresso } from './persistencia'
 beforeEach(() => localStorage.clear())
 
 const opcoes = () => screen.getAllByRole('button', { name: /^[A-D]\./ })
+const corretas = () => document.querySelectorAll('[data-correta]')
+const escolhida = () => document.querySelector('[data-escolhida]')
 
 describe('Estudo', () => {
   it('mostra enunciado e quatro opções', () => {
@@ -26,15 +28,16 @@ describe('Estudo', () => {
     render(<Estudo />)
     fireEvent.click(opcoes()[0]!)
     expect(screen.getByTestId('comentario')).toBeInTheDocument()
-    expect(screen.getAllByTestId('opcao-correta')).toHaveLength(1)
+    expect(corretas()).toHaveLength(1)
   })
 
   it('a resposta não pode ser trocada depois de escolhida', () => {
     render(<Estudo />)
     fireEvent.click(opcoes()[0]!)
-    const escolhidaAntes = screen.getByTestId('opcao-escolhida').textContent
+    const escolhidaAntes = escolhida()?.textContent
+    expect(escolhidaAntes).toBe(opcoes()[0]!.textContent)
     fireEvent.click(opcoes()[2]!)
-    expect(screen.getByTestId('opcao-escolhida').textContent).toBe(escolhidaAntes)
+    expect(escolhida()?.textContent).toBe(escolhidaAntes)
   })
 
   it('avançar só aparece depois de responder e troca a questão', () => {
@@ -74,14 +77,14 @@ describe('Estudo — teclado (critério 11)', () => {
     render(<Estudo />)
     fireEvent.keyDown(window, { key: '2' })
     expect(screen.getByTestId('comentario')).toBeInTheDocument()
-    expect(screen.getAllByTestId('opcao-correta')).toHaveLength(1)
+    expect(corretas()).toHaveLength(1)
   })
 
   it('cada tecla escolhe a opção correspondente', () => {
     render(<Estudo />)
     const textoTerceira = screen.getAllByRole('button', { name: /^[A-D]\./ })[2]!.textContent
     fireEvent.keyDown(window, { key: '3' })
-    expect(screen.getByTestId('opcao-escolhida').textContent).toBe(textoTerceira)
+    expect(escolhida()?.textContent).toBe(textoTerceira)
   })
 
   it('Enter avança depois de responder', () => {
@@ -104,7 +107,7 @@ describe('Estudo — teclado (critério 11)', () => {
     const textoPrimeira = screen.getAllByRole('button', { name: /^[A-D]\./ })[0]!.textContent
     fireEvent.keyDown(window, { key: '1' })
     fireEvent.keyDown(window, { key: '4' })
-    expect(screen.getByTestId('opcao-escolhida').textContent).toBe(textoPrimeira)
+    expect(escolhida()?.textContent).toBe(textoPrimeira)
   })
 
   it('Enter com o botão focado não pula duas questões', () => {

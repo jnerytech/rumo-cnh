@@ -94,6 +94,26 @@ describe('useEstudo', () => {
     }
   })
 
+  it('trocar o filtro troca a questão na tela', () => {
+    const { result, rerender } = renderHook((f: { modulos: (1 | 2 | 3 | 4)[] }) => useEstudo(f), {
+      initialProps: { modulos: [2] as (1 | 2 | 3 | 4)[] },
+    })
+    expect(result.current.questao?.modulo).toBe(2)
+    rerender({ modulos: [4] })
+    expect(result.current.questao?.modulo).toBe(4)
+    expect(result.current.contadores.total).toBe(260)
+  })
+
+  it('trocar o filtro limpa a escolha pendente na tela', () => {
+    const { result, rerender } = renderHook((f: { modulos: (1 | 2 | 3 | 4)[] }) => useEstudo(f), {
+      initialProps: { modulos: [2] as (1 | 2 | 3 | 4)[] },
+    })
+    act(() => result.current.responder(0))
+    expect(result.current.escolha).toBe(0)
+    rerender({ modulos: [4] })
+    expect(result.current.escolha).toBeNull()
+  })
+
   it('trocar filtro não zera o progresso', () => {
     const primeira = renderHook(() => useEstudo({ modulos: [2] }))
     responderE(primeira.result, false)

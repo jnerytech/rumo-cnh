@@ -69,9 +69,10 @@ export function Estudo({ filtro = {} }: { filtro?: FiltroEstudo }) {
                 onClick={() => responder(i)}
                 disabled={respondida}
                 className={correta ? 'correta' : escolhidaErrada ? 'errada' : undefined}
-                data-testid={
-                  correta ? 'opcao-correta' : i === escolha ? 'opcao-escolhida' : undefined
-                }
+                // Atributos independentes: a mesma opção pode ser a escolhida E a correta.
+                // Um data-testid único faria um estado esconder o outro.
+                data-correta={correta || undefined}
+                data-escolhida={i === escolha || undefined}
               >
                 <span className="letra">{LETRAS[i]}.</span> {texto}
               </button>
