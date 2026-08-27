@@ -120,27 +120,27 @@ Próximo: `SPEC-modo-estudo.md`.
 Spec: [`SPEC-modo-estudo.md`](../SPEC-modo-estudo.md) · Plano: [`tasks/plan.md`](plan.md#onda-2--modo-estudo)
 
 ## C1 · Regra da fila (TDD — teste antes do código)
-- [ ] **Tarefa:** `registrarResposta`, `estaDominada`, `proximaQuestao` em `src/estudo/fila.ts`
+- [x] **Tarefa:** `registrarResposta`, `estaDominada`, `proximaQuestao` em `src/estudo/fila.ts`
   - **Aceite:** critérios 1–7 e 6b da spec; `registrarResposta` não muta a entrada; distância efetiva é `min(5, candidatas - 1)`
   - **Verificar:** `npm test` — casos com 1, 3, 5 e 1496 candidatas
   - **Arquivos:** `src/estudo/fila.ts`, `src/estudo/fila.test.ts`
   - **Checkpoint 1 do plano**
 
 ## C2 · Persistência do progresso
-- [ ] **Tarefa:** `carregarProgresso`/`salvarProgresso` com chave `rumo-cnh:progresso:v1`
+- [x] **Tarefa:** `carregarProgresso`/`salvarProgresso` com chave `rumo-cnh:progresso:v1`
   - **Aceite:** critérios 8 e 9; devolve `{}` sem lançar quando ausente, com JSON inválido, ou quando o próprio acesso lança
   - **Verificar:** `npm test` com um `localStorage` falso que lança na leitura e na escrita
   - **Arquivos:** `src/estudo/persistencia.ts`, `src/estudo/persistencia.test.ts`
   - **Checkpoint 2 do plano**
 
 ## C3 · Estado da sessão
-- [ ] **Tarefa:** hook que junta `filtrar` + `prepararQuestao` + fila + persistência
+- [x] **Tarefa:** hook que junta `filtrar` + `prepararQuestao` + fila + persistência
   - **Aceite:** só passa `QuestaoPreparada` adiante; salva progresso a cada resposta; `temPlaca` injetado a partir de `acervo-placas`
   - **Verificar:** `npm test`
   - **Arquivos:** `src/estudo/useEstudo.ts`, `src/estudo/useEstudo.test.ts`
 
 ## C4 · Tela de estudo
-- [ ] **Tarefa:** enunciado, `<Placa/>` quando `requerImagem`, 4 opções, revelar correta + comentário
+- [x] **Tarefa:** enunciado, `<Placa/>` quando `requerImagem`, 4 opções, revelar correta + comentário
   - **Aceite:** critério 10; resposta não pode ser trocada depois de escolhida; avançar é explícito
   - **Verificar:** `npm test` + `npm run dev` e estudar de verdade
   - **Arquivos:** `src/estudo/Estudo.tsx`, `src/estudo/Estudo.test.tsx`, `src/App.tsx`
@@ -159,7 +159,7 @@ Spec: [`SPEC-modo-estudo.md`](../SPEC-modo-estudo.md) · Plano: [`tasks/plan.md`
   - **Arquivos:** `src/estudo/Estudo.tsx`, `src/estudo/Filtros.tsx`
 
 ## C7 · Travar cobertura da fila
-- [ ] **Tarefa:** 100% de branches em `src/estudo/fila.ts`, threshold no config
+- [x] **Tarefa:** 100% de branches em `src/estudo/fila.ts`, threshold no config
   - **Aceite:** critério 12; regressão quebra o build
   - **Verificar:** `npm test -- --coverage`
   - **Arquivos:** `vite.config.ts`
