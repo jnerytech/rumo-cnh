@@ -1,3 +1,6 @@
+import { Estudo } from './estudo/Estudo'
+import './estudo/estudo.css'
+
 export function App() {
-  return <h1>Rumo à CNH</h1>
+  return <Estudo />
 }

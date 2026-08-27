@@ -1,0 +1,136 @@
+:root {
+  --fundo: #fbfaf8;
+  --papel: #fff;
+  --borda: #dcd8d2;
+  --texto: #23201d;
+  --fraco: #6d675f;
+  --acerto: #1c7c3f;
+  --erro: #b3261e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 17px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.estudo {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.contadores {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--fraco);
+  border-bottom: 1px solid var(--borda);
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+}
+.contadores .fraco {
+  margin-left: auto;
+}
+
+.enunciado {
+  font-size: 1.2rem;
+  margin: 0 0 1.25rem;
+}
+
+.placa {
+  text-align: center;
+  margin: 0 0 1.5rem;
+}
+.placa img {
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.opcoes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.opcoes button {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: var(--papel);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+}
+.opcoes button:hover:not(:disabled) {
+  border-color: var(--fraco);
+}
+.opcoes button:disabled {
+  cursor: default;
+}
+.opcoes button:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
+}
+.letra {
+  color: var(--fraco);
+  font-variant-numeric: tabular-nums;
+  margin-right: 0.35rem;
+}
+
+.opcoes .correta {
+  border-color: var(--acerto);
+  box-shadow: inset 3px 0 0 var(--acerto);
+}
+.opcoes .errada {
+  border-color: var(--erro);
+  box-shadow: inset 3px 0 0 var(--erro);
+}
+
+.feedback {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+}
+.feedback .acertou {
+  color: var(--acerto);
+  font-weight: 600;
+  margin: 0;
+}
+.feedback .errou {
+  color: var(--erro);
+  font-weight: 600;
+  margin: 0;
+}
+.comentario {
+  margin: 0.5rem 0 1.5rem;
+  color: var(--fraco);
+}
+
+.avancar {
+  font: inherit;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid var(--texto);
+  border-radius: 8px;
+  background: var(--texto);
+  color: var(--fundo);
+  cursor: pointer;
+}
+
+.vazio {
+  max-width: 720px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  color: var(--fraco);
+}
