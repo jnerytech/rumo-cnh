@@ -67,11 +67,24 @@ Padrão CONTRAN/DENATRAN (Manual Brasileiro de Sinalização de Trânsito). As p
 estão disponíveis em SVG no Wikimedia Commons; sinalização oficial de trânsito brasileira é obra
 oficial e o uso aqui é pessoal e não comercial.
 
-**Risco:** não está verificado que os 69 códigos existem lá com esse nome. Por isso o critério de
-sucesso é medido pelo relatório de cobertura, não presumido. Fallback para código faltante:
-desenhar o SVG à mão a partir do padrão (formas e cores são regulares: regulamentação = círculo
-com borda vermelha, advertência = losango amarelo), ou aceitar a lacuna e deixar `dados` pular
-as questões afetadas.
+**Resultado apurado:** 67 dos 69 códigos vieram do Commons. Dois foram desenhados, porque não
+existem em SVG em lugar nenhum:
+
+- `R-44` — "Circulação compartilhada de ciclistas e pedestres". É sinalização nova: o índice do
+  Manual Brasileiro de Sinalização (Vol. I, p. 8) já a lista, mas nem o Commons nem a Wikipédia
+  têm o desenho. O layout foi conferido contra o quadro da p. 12 do manual do SENATRAN, onde ela
+  aparece sob o código antigo `R-46`: pedestre acima, bicicleta abaixo, sem divisória.
+- `SAU-06` — telefone público, placa azul de serviço auxiliar.
+
+## Discrepância de código na fonte
+
+O banco rotula como `R-35` uma questão cujo gabarito diz "pedestres devem circular à esquerda e os
+ciclistas à direita". Esse sinal é o **R-36b** no manual oficial; o `R-35a`/`R-35b` de verdade é
+"ciclista, transite à esquerda/direita".
+
+O arquivo `public/placas/R-35.svg` segue o **significado do gabarito**, não o código impresso: quem
+estuda precisa reconhecer o sinal que a questão descreve. A discrepância está registrada em
+`public/placas/fontes.json`.
 
 ## Success Criteria
 

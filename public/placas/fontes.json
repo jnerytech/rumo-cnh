@@ -1,5 +1,5 @@
 {
-  "fonte": "Wikimedia Commons + 3 SVGs desenhados",
+  "fonte": "Wikimedia Commons (67) + 2 SVGs desenhados (R-44, SAU-06)",
   "placas": {
     "A-11a": {
       "origem": "Wikimedia Commons",
@@ -262,7 +262,9 @@
       "questoes": 2
     },
     "R-35": {
-      "origem": "desenhado à mão (padrão CONTRAN); não existe no Commons",
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-36b.svg",
+      "observacao": "O banco rotula esta questao como R-35, mas o sinal descrito no gabarito (\"pedestres a esquerda, ciclistas a direita\") e o R-36b no Manual Brasileiro de Sinalizacao. O R-35a/R-35b oficial e \"ciclista, transite a esquerda/direita\". O arquivo segue o significado do gabarito, nao o codigo.",
       "questoes": 3
     },
     "R-37": {
@@ -281,7 +283,8 @@
       "questoes": 3
     },
     "R-44": {
-      "origem": "desenhado à mão (padrão CONTRAN); não existe no Commons",
+      "origem": "desenhado",
+      "observacao": "Nome oficial: \"Circulacao compartilhada de ciclistas e pedestres\" (MBST Vol. I, indice p. 8). Nao existe em SVG no Commons — e sinalizacao nova. Layout conferido contra o quadro da p. 12 do manual do SENATRAN, onde aparece sob o codigo antigo R-46: pedestre acima, bicicleta abaixo, sem divisoria.",
       "questoes": 3
     },
     "R-4a": {
@@ -340,7 +343,8 @@
       "questoes": 2
     },
     "SAU-06": {
-      "origem": "desenhado à mão (padrão CONTRAN); não existe no Commons",
+      "origem": "desenhado",
+      "observacao": "Placa azul de servico auxiliar com monofone. A primeira versao desenhada renderizava como um arco/tunel e foi refeita.",
       "questoes": 1
     }
   }
