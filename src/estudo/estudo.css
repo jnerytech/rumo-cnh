@@ -180,3 +180,67 @@ kbd {
   opacity: 0.4;
   cursor: default;
 }
+
+.nota {
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1.1;
+}
+.nota b {
+  font-variant-numeric: tabular-nums;
+}
+.estudo h2 {
+  font-size: 1rem;
+  margin: 2.5rem 0 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+}
+.historico {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.revisao {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  display: grid;
+  gap: 1.75rem;
+}
+.revisao .enunciado {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.revisao p {
+  margin: 0.15rem 0;
+  font-size: 0.95rem;
+}
+
+.modos {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
+.modos button {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: var(--papel);
+  color: var(--fraco);
+  cursor: pointer;
+}
+.modos button[aria-pressed='true'] {
+  background: var(--texto);
+  border-color: var(--texto);
+  color: var(--fundo);
+}
+.modos button:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 2px;
+}
