@@ -2,6 +2,9 @@ import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  // Relativo: o build precisa funcionar servido de um subcaminho, como
+  // jnerytech.github.io/rumo-cnh/, e não só da raiz de um domínio.
+  base: './',
   plugins: [react()],
   // Porta travada: o progresso vive no localStorage, que é preso à origem.
   // Se o Vite caísse para 5174 por a 5173 estar ocupada, o histórico de estudo

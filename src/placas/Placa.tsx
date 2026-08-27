@@ -7,6 +7,13 @@ import { temPlaca } from './acervo'
 export function Placa({ codigo }: { codigo: string }) {
   if (!temPlaca(codigo)) return null
   return (
-    <img src={`/placas/${codigo}.svg`} alt={`Placa ${codigo}`} width={160} height={160} />
+    <img
+      // BASE_URL, não "/": servido de um subcaminho, o caminho absoluto apontaria
+      // para fora do site e as 69 placas dariam 404.
+      src={`${import.meta.env.BASE_URL}placas/${codigo}.svg`}
+      alt={`Placa ${codigo}`}
+      width={160}
+      height={160}
+    />
   )
 }

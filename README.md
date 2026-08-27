@@ -89,7 +89,14 @@ Feito para uma pessoa estudando para uma prova. Sem contas, sem sincronização,
 sem backend, sem versão mobile. Essas ausências são decisões, registradas em
 [`docs/intent/simulado-cnh.md`](docs/intent/simulado-cnh.md).
 
-## Licença
+## Licença e atribuição
 
-Código sob [MIT](LICENSE). O banco de questões é do SENATRAN e as placas vêm do
-Wikimedia Commons; as condições de cada um estão no `LICENSE`.
+O código deste repositório está sob [MIT](LICENSE). O conteúdo de terceiros tem
+origem e condições próprias:
+
+| O quê | Origem |
+|---|---|
+| `questoes.json`, `Banco Nacional de Questões.pdf` | Banco Nacional de Questões da CNH — Ministério dos Transportes / SENATRAN, distribuído gratuitamente para candidatos. Não é obra deste projeto. |
+| `public/placas/*.svg` (67 arquivos) | Wikimedia Commons, sob as licenças de lá. Procedência arquivo por arquivo em [`public/placas/fontes.json`](public/placas/fontes.json). |
+| `public/placas/R-44.svg`, `public/placas/SAU-06.svg` | Desenhados neste projeto a partir do padrão CONTRAN. |
+| `.claude/`, `.agents/` | Coleções de skills de terceiros, mantidas como registro de como o projeto foi construído. |

@@ -19,17 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-A licença acima cobre o código deste repositório. O conteúdo de terceiros tem
-origem e condições próprias:
-
-- `questoes.json` e `Banco Nacional de Questões.pdf` — Banco Nacional de Questões
-  da CNH, publicação do Ministério dos Transportes / SENATRAN, distribuída
-  gratuitamente para candidatos. Não é obra deste projeto.
-- `public/placas/*.svg` — 67 arquivos do Wikimedia Commons (procedência de cada
-  um em `public/placas/fontes.json`), sob as licenças de lá. `R-44.svg` e
-  `SAU-06.svg` foram desenhados neste projeto a partir do padrão CONTRAN.
-- `.claude/` e `.agents/` — coleções de skills de terceiros, mantidas como
-  registro de como o projeto foi construído.
