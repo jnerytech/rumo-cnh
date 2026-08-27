@@ -103,8 +103,8 @@ export function embaralhar<T>(itens: readonly T[], rng: Rng = Math.random): T[] 
 ## Testing Strategy
 
 - **Vitest**, testes co-localizados como `*.test.ts` / `*.test.tsx`.
-- `src/dados/` é o único módulo com exigência de cobertura: **100% de branches**. É lógica pura,
-  é pequena, e é onde um erro silencioso corrompe todo o resto.
+- Exigência de **100% de branches** vale para a lógica pura onde um erro não dá sintoma:
+  `src/dados/` e `src/estudo/fila.ts`. É pequena, é pura, e é onde um bug corrompe o resto calado.
 - `acervo-placas` é verificado por script (`npm run placas:cobertura`), não por unit test.
 - UI: testes de comportamento com Testing Library apenas nos fluxos que decidem certo/errado
   (responder, revelar comentário, calcular nota). Nada de snapshot de layout.
