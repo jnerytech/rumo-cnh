@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  // Porta travada: o progresso vive no localStorage, que é preso à origem.
+  // Se o Vite caísse para 5174 por a 5173 estar ocupada, o histórico de estudo
+  // simplesmente não estaria lá. Melhor falhar alto do que abrir um app vazio.
+  server: { port: 5173, strictPort: true },
   test: {
     globals: true,
     environment: 'jsdom',
