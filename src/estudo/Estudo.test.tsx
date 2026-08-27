@@ -21,7 +21,7 @@ describe('Estudo', () => {
   it('não revela o comentário antes de responder (critério 10)', () => {
     render(<Estudo />)
     expect(screen.queryByTestId('comentario')).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /próxima/i })).not.toBeInTheDocument()
+    expect(screen.queryByTestId('acao')).not.toBeInTheDocument()
   })
 
   it('responder revela o comentário e marca a correta', () => {
@@ -44,7 +44,7 @@ describe('Estudo', () => {
     render(<Estudo />)
     const antes = screen.getByTestId('enunciado').textContent
     fireEvent.click(opcoes()[0]!)
-    fireEvent.click(screen.getByRole('button', { name: /próxima/i }))
+    fireEvent.click(screen.getByTestId('acao'))
     expect(screen.getByTestId('enunciado').textContent).not.toBe(antes)
     expect(screen.queryByTestId('comentario')).not.toBeInTheDocument()
   })
@@ -113,7 +113,7 @@ describe('Estudo — teclado (critério 11)', () => {
   it('Enter com o botão focado não pula duas questões', () => {
     render(<Estudo />)
     fireEvent.keyDown(window, { key: '1' })
-    const botao = screen.getByRole('button', { name: /próxima/i })
+    const botao = screen.getByTestId('acao')
     const antes = screen.getByTestId('enunciado').textContent
     fireEvent.keyDown(botao, { key: 'Enter' })
     // O handler global ignora; quem avança é o clique nativo do botão.

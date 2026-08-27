@@ -171,3 +171,12 @@ kbd {
   outline: 2px solid var(--texto);
   outline-offset: 1px;
 }
+
+.opcoes .escolhida {
+  border-color: var(--texto);
+  box-shadow: inset 3px 0 0 var(--texto);
+}
+.avancar:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
