@@ -77,6 +77,7 @@ export function Simulado({ aoTerminar }: { aoTerminar: (s: EstadoSimulado) => vo
             type="button"
             className="avancar"
             data-testid="acao"
+            data-avanca
             disabled={escolha === null}
             onClick={() => aoTerminar(finalizar(estado))}
           >
@@ -87,6 +88,7 @@ export function Simulado({ aoTerminar }: { aoTerminar: (s: EstadoSimulado) => vo
             type="button"
             className="avancar"
             data-testid="acao"
+            data-avanca
             disabled={escolha === null}
             onClick={() => setEstado(avancar(estado))}
           >

@@ -46,13 +46,23 @@ describe('useAtalhos', () => {
     select.remove()
   })
 
-  it('não avança quando o alvo é um botão — o clique nativo já faz isso', () => {
+  it('não avança quando o alvo é o próprio botão de avançar — ele já faz isso sozinho', () => {
     const m = montar()
     const botao = document.createElement('button')
+    botao.setAttribute('data-avanca', '')
     document.body.append(botao)
     fireEvent.keyDown(botao, { key: 'Enter' })
     expect(m.avancos()).toBe(0)
     botao.remove()
+  })
+
+  it('avança com o foco em OUTRO botão — trocar de modo não pode engolir o Enter', () => {
+    const m = montar()
+    const outro = document.createElement('button')
+    document.body.append(outro)
+    fireEvent.keyDown(outro, { key: 'Enter' })
+    expect(m.avancos()).toBe(1)
+    outro.remove()
   })
 
   it('teclas fora do conjunto não fazem nada', () => {

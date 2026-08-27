@@ -12,7 +12,8 @@ const TECLAS = ['1', '2', '3', '4', 'a', 'b', 'c', 'd']
 export function useAtalhos({ responder, avancar }: Atalhos) {
   useEffect(() => {
     function aoTeclar(e: KeyboardEvent) {
-      const alvo = e.target as HTMLElement | null
+      // `e.target` pode ser a window ou o document, que não têm closest().
+      const alvo = e.target instanceof Element ? e.target : null
       const tag = alvo?.tagName
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return
 
@@ -23,8 +24,10 @@ export function useAtalhos({ responder, avancar }: Atalhos) {
         return
       }
       if (e.key === 'Enter' || e.key === ' ') {
-        // Botão focado já ativa sozinho; interceptar aqui avançaria duas vezes.
-        if (tag === 'BUTTON') return
+        // Só o botão que JÁ avança por conta própria é ignorado, senão o atalho
+        // avançaria duas questões. Ignorar qualquer botão faria o foco em
+        // "trocar de modo" ou "zerar" engolir o Enter — bug que aconteceu.
+        if (alvo?.closest('[data-avanca]')) return
         e.preventDefault()
         avancar?.()
       }

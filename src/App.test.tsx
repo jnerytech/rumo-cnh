@@ -124,3 +124,30 @@ describe('App — progresso e reset', () => {
     expect(screen.getByTestId('contadores').textContent).toContain('1496')
   })
 })
+
+describe('App — Enter avança com o foco em outro botão', () => {
+  it('no simulado, depois de trocar de modo o Enter ainda avança', () => {
+    render(<App />)
+    const botaoModo = screen.getByTestId('modo-simulado')
+    fireEvent.click(botaoModo)
+    botaoModo.focus() // é onde o foco fica depois de clicar/tocar
+    expect(screen.getByTestId('posicao').textContent).toContain('1/')
+
+    fireEvent.keyDown(botaoModo, { key: '1' })
+    fireEvent.keyDown(botaoModo, { key: 'Enter' })
+    expect(screen.getByTestId('posicao').textContent).toContain('2/')
+  })
+
+  it('Enter no próprio botão de avançar não pula duas questões', () => {
+    render(<App />)
+    fireEvent.click(screen.getByTestId('modo-simulado'))
+    fireEvent.keyDown(window, { key: '1' })
+    const acao = screen.getByTestId('acao')
+    acao.focus()
+    fireEvent.keyDown(acao, { key: 'Enter' })
+    // o clique nativo do botão é que avança; o atalho não pode somar outro
+    expect(screen.getByTestId('posicao').textContent).toContain('1/')
+    fireEvent.click(acao)
+    expect(screen.getByTestId('posicao').textContent).toContain('2/')
+  })
+})

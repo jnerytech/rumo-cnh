@@ -84,7 +84,14 @@ export function Estudo({ filtro = {} }: { filtro?: FiltroEstudo }) {
           <p className="comentario" data-testid="comentario">
             {questao.comentario}
           </p>
-          <button type="button" className="avancar" data-testid="acao" onClick={avancar} autoFocus>
+          <button
+            type="button"
+            className="avancar"
+            data-testid="acao"
+            data-avanca
+            onClick={avancar}
+            autoFocus
+          >
             Próxima questão <kbd>Enter</kbd>
           </button>
         </div>
