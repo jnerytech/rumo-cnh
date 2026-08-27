@@ -122,3 +122,17 @@ describe('Estudo — teclado (critério 11)', () => {
     expect(screen.getByTestId('enunciado').textContent).not.toBe(antes)
   })
 })
+
+describe('Estudo — atalhos explícitos', () => {
+  it('letras A a D respondem, casando com o rótulo da opção', () => {
+    render(<Estudo />)
+    const textoSegunda = opcoes()[1]!.textContent
+    fireEvent.keyDown(window, { key: 'B' })
+    expect(escolhida()?.textContent).toBe(textoSegunda)
+  })
+
+  it('mostra a legenda de atalhos', () => {
+    render(<Estudo />)
+    expect(screen.getByTestId('legenda-atalhos')).toBeInTheDocument()
+  })
+})

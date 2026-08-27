@@ -3,6 +3,8 @@ import { carregarQuestoes } from '../dados/carregar'
 import { filtrar } from '../dados/filtrar'
 import { Placa } from '../placas/Placa'
 import { temPlaca } from '../placas/acervo'
+import { LegendaAtalhos } from '../ui/LegendaAtalhos'
+import { useAtalhos } from '../ui/useAtalhos'
 import {
   avancar,
   criarSimulado,
@@ -19,10 +21,20 @@ export function Simulado({ aoTerminar }: { aoTerminar: (s: EstadoSimulado) => vo
   )
 
   const questao = estado.questoes[estado.atual]
-  if (!questao) return null
-
-  const escolha = estado.respostas[estado.atual] ?? null
+  const escolha = questao ? (estado.respostas[estado.atual] ?? null) : null
   const ultima = estado.atual === estado.questoes.length - 1
+
+  // Mesmos atalhos do modo estudo. Na última questão, avançar é finalizar.
+  useAtalhos({
+    responder: (i) => setEstado(responder(estado, i)),
+    avancar: () => {
+      if (escolha === null) return
+      if (ultima) aoTerminar(finalizar(estado))
+      else setEstado(avancar(estado))
+    },
+  })
+
+  if (!questao) return null
 
   return (
     <section className="estudo">
@@ -41,6 +53,8 @@ export function Simulado({ aoTerminar }: { aoTerminar: (s: EstadoSimulado) => vo
           <Placa codigo={questao.codigoPlaca} />
         </div>
       )}
+
+      <LegendaAtalhos />
 
       <ol className="opcoes">
         {questao.opcoes.map((texto, i) => (

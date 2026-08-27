@@ -77,3 +77,48 @@ describe('Simulado — a prova (critério 13)', () => {
     // 8 das 30 questões são do M1; nenhuma com placa em 30 seria suspeito, não impossível.
   })
 })
+
+describe('Simulado — teclado', () => {
+  it('teclas 1 a 4 respondem', () => {
+    render(<Simulado aoTerminar={() => {}} />)
+    fireEvent.keyDown(window, { key: '3' })
+    expect(document.querySelector('[data-escolhida]')?.textContent).toBe(opcoes()[2]!.textContent)
+  })
+
+  it('letras A a D respondem, igual ao rótulo na tela', () => {
+    render(<Simulado aoTerminar={() => {}} />)
+    fireEvent.keyDown(window, { key: 'b' })
+    expect(document.querySelector('[data-escolhida]')?.textContent).toBe(opcoes()[1]!.textContent)
+  })
+
+  it('Enter avança depois de responder', () => {
+    render(<Simulado aoTerminar={() => {}} />)
+    fireEvent.keyDown(window, { key: '1' })
+    fireEvent.keyDown(window, { key: 'Enter' })
+    expect(screen.getByTestId('posicao').textContent).toContain('2/')
+  })
+
+  it('Enter sem responder não avança', () => {
+    render(<Simulado aoTerminar={() => {}} />)
+    fireEvent.keyDown(window, { key: 'Enter' })
+    expect(screen.getByTestId('posicao').textContent).toContain('1/')
+  })
+
+  it('Enter na última questão finaliza a prova', () => {
+    const terminados: { finalizado: boolean }[] = []
+    render(<Simulado aoTerminar={(s) => terminados.push(s)} />)
+    for (let i = 0; i < QUESTOES - 1; i++) {
+      fireEvent.keyDown(window, { key: '1' })
+      fireEvent.keyDown(window, { key: 'Enter' })
+    }
+    fireEvent.keyDown(window, { key: '1' })
+    fireEvent.keyDown(window, { key: 'Enter' })
+    expect(terminados).toHaveLength(1)
+    expect(terminados[0]!.finalizado).toBe(true)
+  })
+
+  it('mostra a legenda de atalhos', () => {
+    render(<Simulado aoTerminar={() => {}} />)
+    expect(screen.getByTestId('legenda-atalhos')).toBeInTheDocument()
+  })
+})

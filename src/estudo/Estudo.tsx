@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
 import { Placa } from '../placas/Placa'
+import { LegendaAtalhos } from '../ui/LegendaAtalhos'
+import { useAtalhos } from '../ui/useAtalhos'
 import { useEstudo, type FiltroEstudo } from './useEstudo'
 
 const LETRAS = ['A', 'B', 'C', 'D']
@@ -8,27 +9,7 @@ export function Estudo({ filtro = {} }: { filtro?: FiltroEstudo }) {
   const { questao, escolha, responder, avancar, contadores } = useEstudo(filtro)
   const respondida = escolha !== null
 
-  useEffect(() => {
-    function aoTeclar(e: KeyboardEvent) {
-      const alvo = e.target as HTMLElement | null
-      if (alvo?.tagName === 'INPUT' || alvo?.tagName === 'SELECT') return
-
-      const indice = LETRAS.findIndex((_, i) => e.key === String(i + 1))
-      if (indice >= 0) {
-        e.preventDefault()
-        responder(indice)
-        return
-      }
-      if (e.key === 'Enter' || e.key === ' ') {
-        // Botão focado já ativa sozinho; interceptar aqui avançaria duas questões.
-        if (alvo?.tagName === 'BUTTON') return
-        e.preventDefault()
-        avancar()
-      }
-    }
-    window.addEventListener('keydown', aoTeclar)
-    return () => window.removeEventListener('keydown', aoTeclar)
-  }, [responder, avancar])
+  useAtalhos({ responder, avancar })
 
   if (questao === null) {
     return <p className="vazio">Nenhuma questão com os filtros atuais.</p>
@@ -57,6 +38,8 @@ export function Estudo({ filtro = {} }: { filtro?: FiltroEstudo }) {
           <Placa codigo={questao.codigoPlaca} />
         </div>
       )}
+
+      <LegendaAtalhos />
 
       <ol className="opcoes">
         {questao.opcoes.map((texto, i) => {

@@ -244,3 +244,21 @@ kbd {
   outline: 2px solid var(--texto);
   outline-offset: 2px;
 }
+
+.atalhos {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  color: var(--fraco);
+}
+.atalhos kbd {
+  margin: 0 0.1em;
+}
+/* Aparelho sem teclado: a legenda só ocuparia espaço. */
+@media (hover: none) {
+  .atalhos {
+    display: none;
+  }
+  .avancar kbd {
+    display: none;
+  }
+}
