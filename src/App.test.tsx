@@ -88,3 +88,39 @@ describe('App — a prova de ponta a ponta', () => {
     expect(screen.getByTestId('posicao').textContent).toContain(`1/${QUESTOES}`)
   })
 })
+
+describe('App — progresso e reset', () => {
+  it('mostra a barra de progresso com as dominadas', () => {
+    render(<App />)
+    const barra = screen.getByTestId('barra-progresso')
+    expect(barra).toHaveAttribute('max', '1496')
+    expect(barra).toHaveAttribute('value', '0')
+  })
+
+  it('zerar exige confirmação — um clique só não apaga', () => {
+    render(<App />)
+    fireEvent.click(opcoes()[0]!)
+    fireEvent.click(screen.getByTestId('acao'))
+    expect(Object.keys(carregarProgresso())).toHaveLength(1)
+
+    fireEvent.click(screen.getByTestId('zerar'))
+    expect(screen.getByTestId('zerar').textContent).toMatch(/confirmar/i)
+    expect(Object.keys(carregarProgresso())).toHaveLength(1)
+  })
+
+  it('confirmar zera o progresso do estudo e o histórico de provas', () => {
+    render(<App />)
+    fireEvent.click(screen.getByTestId('modo-simulado'))
+    fazerProvaErrando()
+    expect(carregarHistorico()).toHaveLength(1)
+    expect(Object.keys(carregarProgresso()).length).toBeGreaterThan(0)
+
+    fireEvent.click(screen.getByTestId('modo-estudo'))
+    fireEvent.click(screen.getByTestId('zerar'))
+    fireEvent.click(screen.getByTestId('zerar'))
+
+    expect(carregarProgresso()).toEqual({})
+    expect(carregarHistorico()).toEqual([])
+    expect(screen.getByTestId('contadores').textContent).toContain('1496')
+  })
+})

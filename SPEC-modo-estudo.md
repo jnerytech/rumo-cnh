@@ -62,6 +62,7 @@ comportamento certo, porque não existe outra coisa para mostrar.
 // src/estudo/persistencia.ts
 export function carregarProgresso(): Progresso  // localStorage; vazio se ausente ou corrompido
 export function salvarProgresso(p: Progresso): void
+export function zerarProgresso(): void          // silencioso se o storage recusar
 ```
 
 Chave: `rumo-cnh:progresso:v1`. O `v1` existe para que uma mudança de formato não exploda em cima
@@ -72,9 +73,15 @@ de dado velho — versão nova ignora a antiga em vez de tentar migrar.
 - Enunciado, a placa quando `requerImagem` (via `<Placa/>`), e as 4 `opcoes`.
 - Escolher uma opção **revela** a correta e o `comentario`; a resposta não pode ser trocada depois.
 - Avançar é uma ação explícita, nunca automática — ler o comentário é onde o aprendizado acontece.
-- Teclado: `1`–`4` respondem, `Enter`/`espaço` avança. É desktop; teclado não é enfeite.
+- Teclado: `A`–`D` **ou** `1`–`4` respondem, `Enter`/espaço avança. As letras casam com o
+  rótulo das opções na tela. Os atalhos ficam escritos na interface, e somem em aparelho sem
+  teclado (`@media (hover: none)`).
 - Filtros de módulo e dificuldade, aplicados via `filtrar` de `dados`.
-- Contador visível: quantas inéditas restam e quantas estão pendentes de revisão.
+- Contadores visíveis: **aprendidas** (dominadas), **a revisar** (pendentes) e **inéditas**, mais
+  uma barra de progresso de aprendidas sobre o total do recorte.
+- Botão de zerar progresso, com confirmação em dois cliques. Apaga o progresso do estudo e o
+  histórico de provas — apagar semanas de estudo não pode ser um toque acidental, e um
+  `window.confirm` é feio e bloqueável.
 
 ## Success Criteria
 
@@ -95,7 +102,9 @@ Testáveis, em `src/estudo/*.test.ts`:
 9. Progresso sobrevive a recarregar a página (ida e volta por `salvarProgresso`/`carregarProgresso`).
 10. A tela mostra `opcoes` e nunca `alternativas` — garantido pelo tipo `QuestaoPreparada`, e
     verificado por um teste que responde e confere que o comentário aparece só depois.
-11. Responder pelo teclado (`1`–`4`) produz o mesmo efeito que clicar.
+11. Responder pelo teclado (`A`–`D` ou `1`–`4`) produz o mesmo efeito que clicar, nos dois modos.
+11b. Zerar exige dois cliques; o primeiro só pede confirmação. O segundo apaga progresso e
+     histórico, e os contadores voltam ao total.
 12. **100% de branches em `src/estudo/fila.ts`** — é lógica pura onde erro não dá sintoma, mesma
     razão de `src/dados/`. Threshold no `vite.config.ts`.
 

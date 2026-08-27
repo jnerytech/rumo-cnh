@@ -3,13 +3,25 @@ import { carregarQuestoes } from '../dados/carregar'
 import { filtrar, type Filtro } from '../dados/filtrar'
 import { prepararQuestao, type QuestaoPreparada } from '../dados/preparar'
 import { temPlaca } from '../placas/acervo'
-import { estaPendente, proximaQuestao, registrarResposta, type Progresso } from './fila'
+import {
+  estaDominada,
+  estaPendente,
+  proximaQuestao,
+  registrarResposta,
+  type Progresso,
+} from './fila'
 import { carregarProgresso, salvarProgresso } from './persistencia'
 
 /** Um pouco acima de DISTANCIA_MINIMA, que é o quanto proximaQuestao chega a consultar. */
 const JANELA_RECENTES = 10
 
-export type Contadores = { total: number; ineditas: number; pendentes: number }
+export type Contadores = {
+  total: number
+  ineditas: number
+  pendentes: number
+  /** Duas respostas certas seguidas — o que você pode considerar aprendido. */
+  dominadas: number
+}
 
 export type Estudo = {
   questao: QuestaoPreparada | null
@@ -86,6 +98,7 @@ export function useEstudo(filtro: FiltroEstudo): Estudo {
       total: candidatas.length,
       ineditas: candidatas.filter((q) => (progresso[q.id]?.vistas ?? 0) === 0).length,
       pendentes: candidatas.filter((q) => estaPendente(progresso[q.id])).length,
+      dominadas: candidatas.filter((q) => estaDominada(progresso[q.id])).length,
     }),
     [candidatas, progresso],
   )

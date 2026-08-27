@@ -12,7 +12,7 @@ export type Prova = { em: string; acertos: number; total: number }
  * propósito: importar de lá criaria uma dependência modo-simulado -> modo-estudo que
  * o CAPABILITY-MAP não declara. Uma linha duplicada custa menos que uma seta errada.
  */
-export type Armazem = Pick<Storage, 'getItem' | 'setItem'>
+export type Armazem = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
 
 function armazemPadrao(): Armazem | null {
   try {
@@ -54,5 +54,14 @@ export function registrarProva(p: Prova, armazem: Armazem | null = armazemPadrao
     armazem?.setItem(CHAVE_HISTORICO, JSON.stringify(historico))
   } catch {
     // Perder o histórico é ruim; derrubar a tela de resultado é pior.
+  }
+}
+
+/** Apaga o que está guardado. Silencioso: não há como avisar melhor se o storage recusa. */
+export function zerarHistorico(armazem: Armazem | null = armazemPadrao()): void {
+  try {
+    armazem?.removeItem(CHAVE_HISTORICO)
+  } catch {
+    // storage bloqueado: nada a fazer
   }
 }

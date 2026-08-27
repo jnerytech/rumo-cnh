@@ -7,11 +7,18 @@ Dois modos:
 
 - **Estudar** — varre as 1496 questões com fila de erros. O que você errou volta,
   e precisa de **dois acertos seguidos** para sair da fila (um acerto pode ser chute).
-  Teclado: `1`–`4` respondem, `Enter` avança.
+  Contadores de **aprendidas / a revisar / inéditas** com barra de progresso, e botão de zerar
+  com confirmação em dois cliques.
 - **Simulado** — 30 questões na proporção real do banco (8/4/13/5 por módulo),
   **sem revelar nada durante a prova**. No fim: nota, veredito contra o mínimo de
   24/30, e cada erro com sua resposta, a correta e o comentário. Errar aqui
   alimenta a fila de revisão do modo estudo.
+
+**Teclado nos dois modos:** `A`–`D` ou `1`–`4` respondem, `Enter` avança (e finaliza a prova na
+última questão). Os atalhos ficam escritos na tela e somem em aparelho sem teclado.
+
+**No celular:** layout responsivo, alvos de toque de 44 px, sem rolagem horizontal. O app é uma
+página estática — abre no navegador do telefone pelo endereço publicado.
 
 ## Rodar
 

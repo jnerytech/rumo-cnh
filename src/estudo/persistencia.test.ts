@@ -1,4 +1,10 @@
-import { CHAVE_PROGRESSO, carregarProgresso, salvarProgresso, type Armazem } from './persistencia'
+import {
+  CHAVE_PROGRESSO,
+  carregarProgresso,
+  salvarProgresso,
+  zerarProgresso,
+  type Armazem,
+} from './persistencia'
 import type { Progresso } from './fila'
 
 const armazemFalso = (inicial: Record<string, string> = {}): Armazem => {
@@ -8,6 +14,9 @@ const armazemFalso = (inicial: Record<string, string> = {}): Armazem => {
     setItem: (k, v) => {
       dados[k] = v
     },
+    removeItem: (k) => {
+      delete dados[k]
+    },
   }
 }
 const armazemQueLanca = (): Armazem => ({
@@ -16,6 +25,9 @@ const armazemQueLanca = (): Armazem => ({
   },
   setItem: () => {
     throw new DOMException('cota excedida')
+  },
+  removeItem: () => {
+    throw new DOMException('acesso negado')
   },
 })
 
@@ -46,6 +58,20 @@ describe('carregarProgresso (critério 8)', () => {
 
   it('devolve vazio quando não há storage nenhum', () => {
     expect(carregarProgresso(null)).toEqual({})
+  })
+})
+
+describe('zerarProgresso', () => {
+  it('apaga o progresso guardado', () => {
+    const armazem = armazemFalso()
+    salvarProgresso(progresso, armazem)
+    zerarProgresso(armazem)
+    expect(carregarProgresso(armazem)).toEqual({})
+  })
+
+  it('não lança sem storage nem quando o storage recusa', () => {
+    expect(() => zerarProgresso(null)).not.toThrow()
+    expect(() => zerarProgresso(armazemQueLanca())).not.toThrow()
   })
 })
 

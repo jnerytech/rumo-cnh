@@ -10,6 +10,8 @@
 
 * {
   box-sizing: border-box;
+  /* O realce azul do toque some; o estado de escolhida já é visível por conta própria. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -260,5 +262,131 @@ kbd {
   }
   .avancar kbd {
     display: none;
+  }
+}
+
+.barra {
+  display: block;
+  width: 100%;
+  height: 5px;
+  margin: 0 0 1.75rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--borda);
+  appearance: none;
+}
+.barra::-webkit-progress-bar {
+  background: var(--borda);
+  border-radius: 999px;
+}
+.barra::-webkit-progress-value {
+  background: var(--acerto);
+  border-radius: 999px;
+}
+.barra::-moz-progress-bar {
+  background: var(--acerto);
+  border-radius: 999px;
+}
+
+.modos .zerar {
+  margin-left: auto;
+  border-color: transparent;
+}
+.modos .zerar.confirmando {
+  background: var(--erro);
+  border-color: var(--erro);
+  color: #fff;
+}
+
+/* ---- celular ---------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .modos,
+  .filtros,
+  .estudo {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .estudo {
+    padding-top: 1.25rem;
+    padding-bottom: 3rem;
+  }
+
+  .modos {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .modos button {
+    /* Alvo de toque: 0.4rem de padding dava ~32px, abaixo do mínimo confortável. */
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+  .modos .zerar {
+    /* Discreto de propósito: apagar semanas de estudo não é ação principal. */
+    order: 3;
+    margin: 0.15rem 0 0 auto;
+    padding: 0.35rem 0;
+    width: auto;
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    text-decoration: underline;
+  }
+  .modos .zerar.confirmando {
+    background: none;
+    color: var(--erro);
+    font-weight: 600;
+  }
+
+  .filtros {
+    gap: 0.6rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filtros label {
+    justify-content: space-between;
+  }
+  .filtros select {
+    /* 16px evita o zoom automático do iOS ao focar o campo. */
+    font-size: 16px;
+    /* 0.5rem dava 39px de altura, abaixo do alvo de toque confortável. */
+    padding: 0.7rem 0.5rem;
+    flex: 1;
+    margin-left: 0.75rem;
+  }
+
+  .contadores {
+    flex-wrap: wrap;
+    gap: 0.15rem 1rem;
+    font-size: 0.8rem;
+  }
+  .contadores .fraco {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .enunciado {
+    font-size: 1.05rem;
+  }
+  .opcoes button {
+    padding: 0.9rem 1rem;
+  }
+  .avancar {
+    width: 100%;
+    padding: 0.9rem 1.4rem;
+  }
+  .placa img {
+    width: 132px;
+    height: 132px;
+  }
+  .nota {
+    font-size: 2.4rem;
+  }
+  .revisao {
+    padding-left: 1rem;
   }
 }

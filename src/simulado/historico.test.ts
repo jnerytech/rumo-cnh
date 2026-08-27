@@ -3,6 +3,7 @@ import {
   CHAVE_HISTORICO,
   carregarHistorico,
   registrarProva,
+  zerarHistorico,
   type Armazem,
   type Prova,
 } from './historico'
@@ -14,6 +15,9 @@ const armazemFalso = (inicial: Record<string, string> = {}): Armazem => {
     setItem: (k, v) => {
       dados[k] = v
     },
+    removeItem: (k) => {
+      delete dados[k]
+    },
   }
 }
 const armazemQueLanca = (): Armazem => ({
@@ -22,6 +26,9 @@ const armazemQueLanca = (): Armazem => ({
   },
   setItem: () => {
     throw new DOMException('cota excedida')
+  },
+  removeItem: () => {
+    throw new DOMException('acesso negado')
   },
 })
 
@@ -82,5 +89,19 @@ describe('registrarProva', () => {
   it('não tem relógio interno: o instante chega de fora', () => {
     const fonte = readFileSync('src/simulado/historico.ts', 'utf8')
     expect(fonte).not.toMatch(/new Date|Date\.now/)
+  })
+})
+
+describe('zerarHistorico', () => {
+  it('apaga o histórico guardado', () => {
+    const armazem = armazemFalso()
+    registrarProva(prova('2026-08-27T10:00:00Z', 26), armazem)
+    zerarHistorico(armazem)
+    expect(carregarHistorico(armazem)).toEqual([])
+  })
+
+  it('não lança sem storage nem quando o storage recusa', () => {
+    expect(() => zerarHistorico(null)).not.toThrow()
+    expect(() => zerarHistorico(armazemQueLanca())).not.toThrow()
   })
 })

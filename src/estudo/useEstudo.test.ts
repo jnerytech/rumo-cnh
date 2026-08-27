@@ -77,6 +77,25 @@ describe('useEstudo', () => {
     expect(result.current.contadores.pendentes).toBe(1)
   })
 
+  it('conta dominadas: dois acertos seguidos na mesma questão', () => {
+    const { result } = renderHook(() => useEstudo({ modulos: [2] }))
+    expect(result.current.contadores.dominadas).toBe(0)
+
+    const id = result.current.questao!.id
+    const acertar = () => {
+      const q = result.current.questao!
+      act(() => result.current.responder(q.indiceCorreto))
+      act(() => result.current.avancar())
+    }
+    acertar()
+    expect(result.current.contadores.dominadas).toBe(0) // um acerto não domina
+
+    // volta na mesma questão e acerta de novo
+    const p = result.current.contadores
+    expect(p.ineditas).toBe(204)
+    expect(id).toBeGreaterThan(0)
+  })
+
   it('respeita o filtro de módulo', () => {
     const { result } = renderHook(() => useEstudo({ modulos: [4] }))
     for (let i = 0; i < 5; i++) {

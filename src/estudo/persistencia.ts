@@ -7,7 +7,7 @@ import type { Progresso, ProgressoQuestao } from './fila'
 export const CHAVE_PROGRESSO = 'rumo-cnh:progresso:v1'
 
 /** Só o que este módulo usa do Storage — deixa o teste injetar um falso. */
-export type Armazem = Pick<Storage, 'getItem' | 'setItem'>
+export type Armazem = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>
 
 /** O acesso a localStorage pode lançar por si só (aba privada, storage bloqueado). */
 function armazemPadrao(): Armazem | null {
@@ -59,5 +59,14 @@ export function salvarProgresso(p: Progresso, armazem: Armazem | null = armazemP
     armazem?.setItem(CHAVE_PROGRESSO, JSON.stringify(p))
   } catch {
     // Storage cheio ou bloqueado: perder o progresso é ruim, mas derrubar a tela é pior.
+  }
+}
+
+/** Apaga o que está guardado. Silencioso: não há como avisar melhor se o storage recusa. */
+export function zerarProgresso(armazem: Armazem | null = armazemPadrao()): void {
+  try {
+    armazem?.removeItem(CHAVE_PROGRESSO)
+  } catch {
+    // storage bloqueado: nada a fazer
   }
 }
