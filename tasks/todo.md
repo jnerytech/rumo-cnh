@@ -180,3 +180,46 @@ Dois bugs achados por teste durante a onda, ambos corrigidos:
   dependendo de onde o embaralhamento tivesse posto a correta
 
 Próximo: `SPEC-modo-simulado.md` (onda 3).
+
+---
+
+# Tarefas — onda 3 (`modo-simulado`)
+
+Spec: [`SPEC-modo-simulado.md`](../SPEC-modo-simulado.md) · TDD estrito: vermelho antes de verde,
+em ciclos pequenos, com o vermelho mostrado.
+
+## D1 · Núcleo puro do simulado
+- [ ] **Tarefa:** `criarSimulado`, `responder`, `avancar`, `finalizar`, `resultado`
+  - **Aceite:** critérios 1–10
+  - **Verificar:** `npm test src/simulado`
+  - **Arquivos:** `src/simulado/simulado.ts`, `src/simulado/simulado.test.ts`
+
+## D2 · Simulado alimenta a fila de estudo
+- [ ] **Tarefa:** finalizar registra cada questão no `Progresso` do estudo
+  - **Aceite:** critério 11 — erradas ficam pendentes, e o registro é só na finalização
+  - **Verificar:** `npm test src/simulado`
+  - **Arquivos:** `src/simulado/simulado.ts`, `src/simulado/simulado.test.ts`
+
+## D3 · Histórico de provas
+- [ ] **Tarefa:** `carregarHistorico`/`registrarProva`, chave `rumo-cnh:simulados:v1`
+  - **Aceite:** critério 12; `em` injetado, sem relógio interno
+  - **Verificar:** `npm test src/simulado`
+  - **Arquivos:** `src/simulado/historico.ts`, `src/simulado/historico.test.ts`
+
+## D4 · Tela da prova
+- [ ] **Tarefa:** 30 questões em silêncio, contador `N/30`, sem revelar nada
+  - **Aceite:** critério 13
+  - **Verificar:** `npm test src/simulado` + `npm run dev`
+  - **Arquivos:** `src/simulado/Simulado.tsx`, `src/simulado/useSimulado.ts` + testes
+
+## D5 · Tela de resultado e revisão
+- [ ] **Tarefa:** `N/30`, veredito, lista de erros com sua resposta, a correta e o comentário
+  - **Aceite:** critério 14
+  - **Verificar:** `npm test src/simulado` + `npm run dev`
+  - **Arquivos:** `src/simulado/Resultado.tsx`, `src/App.tsx` + teste
+
+## D6 · Travar cobertura
+- [ ] **Tarefa:** 100% de branches em `src/simulado/simulado.ts`
+  - **Aceite:** critério 15
+  - **Verificar:** `npm test -- --coverage`
+  - **Arquivos:** `vite.config.ts`
