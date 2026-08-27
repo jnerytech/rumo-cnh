@@ -30,7 +30,7 @@ export function estaDominada(q: ProgressoQuestao | undefined): boolean {
   return q !== undefined && q.acertosSeguidos >= ACERTOS_PARA_DOMINAR
 }
 
-function estaPendente(q: ProgressoQuestao | undefined): boolean {
+export function estaPendente(q: ProgressoQuestao | undefined): boolean {
   return q !== undefined && q.erros > 0 && !estaDominada(q)
 }
 
