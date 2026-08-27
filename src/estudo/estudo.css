@@ -342,21 +342,38 @@ kbd {
     font-weight: 600;
   }
 
+  /* Lado a lado, rótulo em cima: empilhados, os filtros empurravam a questão
+     para baixo da dobra. E o rótulo acima resolve o desalinhamento que havia
+     entre os dois selects, porque "Módulo" e "Dificuldade" têm larguras
+     diferentes. */
   .filtros {
+    flex-direction: row;
     gap: 0.6rem;
-    flex-direction: column;
-    align-items: stretch;
+    align-items: flex-end;
   }
   .filtros label {
-    justify-content: space-between;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.15rem;
+    font-size: 0.75rem;
   }
   .filtros select {
     /* 16px evita o zoom automático do iOS ao focar o campo. */
     font-size: 16px;
     /* 0.5rem dava 39px de altura, abaixo do alvo de toque confortável. */
-    padding: 0.7rem 0.5rem;
-    flex: 1;
-    margin-left: 0.75rem;
+    padding: 0.65rem 0.5rem;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .contadores {
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .barra {
+    margin-bottom: 1.25rem;
   }
 
   .contadores {

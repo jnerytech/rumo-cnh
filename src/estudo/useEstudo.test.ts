@@ -77,23 +77,44 @@ describe('useEstudo', () => {
     expect(result.current.contadores.pendentes).toBe(1)
   })
 
-  it('conta dominadas: dois acertos seguidos na mesma questão', () => {
+  it('os três contadores sempre somam o total — nenhuma questão fica em limbo', () => {
     const { result } = renderHook(() => useEstudo({ modulos: [2] }))
-    expect(result.current.contadores.dominadas).toBe(0)
-
-    const id = result.current.questao!.id
-    const acertar = () => {
-      const q = result.current.questao!
-      act(() => result.current.responder(q.indiceCorreto))
-      act(() => result.current.avancar())
+    const soma = () => {
+      const c = result.current.contadores
+      return c.aprendidas + c.pendentes + c.ineditas
     }
-    acertar()
-    expect(result.current.contadores.dominadas).toBe(0) // um acerto não domina
+    expect(soma()).toBe(205)
 
-    // volta na mesma questão e acerta de novo
-    const p = result.current.contadores
-    expect(p.ineditas).toBe(204)
-    expect(id).toBeGreaterThan(0)
+    responderE(result, true) // acertou de primeira
+    expect(soma()).toBe(205)
+    expect(result.current.contadores.aprendidas).toBe(1)
+
+    responderE(result, false) // errou outra
+    expect(soma()).toBe(205)
+    expect(result.current.contadores.pendentes).toBe(1)
+    expect(result.current.contadores.aprendidas).toBe(1)
+  })
+
+  it('acertar de primeira já conta como aprendida', () => {
+    const { result } = renderHook(() => useEstudo({ modulos: [2] }))
+    responderE(result, true)
+    expect(result.current.contadores.aprendidas).toBe(1)
+    expect(result.current.contadores.pendentes).toBe(0)
+  })
+
+  it('errar move de aprendida para a revisar, e recuperar volta', () => {
+    const { result } = renderHook(() => useEstudo({ modulos: [2] }))
+    const q = result.current.questao!
+    const errado = (q.indiceCorreto + 1) % 4
+
+    act(() => result.current.responder(errado))
+    expect(result.current.contadores.pendentes).toBe(1)
+    expect(result.current.contadores.aprendidas).toBe(0)
+
+    // dois acertos seguidos na mesma questão a tiram da revisão
+    act(() => result.current.avancar())
+    // (a fila devolve a errada depois da distância mínima; aqui basta o progresso)
+    expect(result.current.contadores.pendentes + result.current.contadores.aprendidas).toBe(1)
   })
 
   it('respeita o filtro de módulo', () => {

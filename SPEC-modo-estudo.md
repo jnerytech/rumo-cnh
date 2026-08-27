@@ -77,8 +77,19 @@ de dado velho — versão nova ignora a antiga em vez de tentar migrar.
   rótulo das opções na tela. Os atalhos ficam escritos na interface, e somem em aparelho sem
   teclado (`@media (hover: none)`).
 - Filtros de módulo e dificuldade, aplicados via `filtrar` de `dados`.
-- Contadores visíveis: **aprendidas** (dominadas), **a revisar** (pendentes) e **inéditas**, mais
-  uma barra de progresso de aprendidas sobre o total do recorte.
+- Contadores visíveis: **aprendidas**, **a revisar** e **inéditas**, mais uma barra de progresso de
+  aprendidas sobre o total do recorte. Os três **particionam** o total — cada questão está em
+  exatamente um estado, e a soma sempre fecha:
+
+  | Contador | Significado | Quando muda |
+  |---|---|---|
+  | inéditas | nunca respondida | cai 1 na primeira vez que você responde a questão |
+  | a revisar | errou e ainda não recuperou | sobe ao errar; cai quando você acerta duas vezes seguidas a mesma questão |
+  | aprendidas | respondida e fora da revisão | sobe ao acertar de primeira, ou ao recuperar um erro |
+
+  A primeira versão definia "aprendidas" como dois acertos seguidos, e era métrica morta: a fila só
+  devolve questão que você errou, então quem acertou de primeira nunca ganhava o segundo acerto e
+  ficava fora das três contagens. Os contadores não fechavam o total.
 - Botão de zerar progresso, com confirmação em dois cliques. Apaga o progresso do estudo e o
   histórico de provas — apagar semanas de estudo não pode ser um toque acidental, e um
   `window.confirm` é feio e bloqueável.
@@ -105,6 +116,8 @@ Testáveis, em `src/estudo/*.test.ts`:
 11. Responder pelo teclado (`A`–`D` ou `1`–`4`) produz o mesmo efeito que clicar, nos dois modos.
 11b. Zerar exige dois cliques; o primeiro só pede confirmação. O segundo apaga progresso e
      histórico, e os contadores voltam ao total.
+11c. `aprendidas + a revisar + inéditas === total`, sempre — invariante testada depois de acertar
+     e depois de errar.
 12. **100% de branches em `src/estudo/fila.ts`** — é lógica pura onde erro não dá sintoma, mesma
     razão de `src/dados/`. Threshold no `vite.config.ts`.
 

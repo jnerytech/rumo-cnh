@@ -3,24 +3,28 @@ import { carregarQuestoes } from '../dados/carregar'
 import { filtrar, type Filtro } from '../dados/filtrar'
 import { prepararQuestao, type QuestaoPreparada } from '../dados/preparar'
 import { temPlaca } from '../placas/acervo'
-import {
-  estaDominada,
-  estaPendente,
-  proximaQuestao,
-  registrarResposta,
-  type Progresso,
-} from './fila'
+import { estaPendente, proximaQuestao, registrarResposta, type Progresso } from './fila'
 import { carregarProgresso, salvarProgresso } from './persistencia'
 
 /** Um pouco acima de DISTANCIA_MINIMA, que é o quanto proximaQuestao chega a consultar. */
 const JANELA_RECENTES = 10
 
+/**
+ * Os três somam `total`, sempre: cada questão está em exatamente um estado.
+ *
+ * A primeira versão contava como "aprendida" só quem tivesse dois acertos
+ * seguidos. Era métrica morta: a fila só devolve questão que você ERROU, então
+ * quem acertou de primeira nunca ganhava o segundo acerto e ficava fora das três
+ * contagens — os contadores não fechavam o total.
+ */
 export type Contadores = {
   total: number
-  ineditas: number
+  /** Respondida e fora da revisão: acertou de primeira, ou já recuperou o erro. */
+  aprendidas: number
+  /** Errou e ainda não recuperou (precisa de dois acertos seguidos). */
   pendentes: number
-  /** Duas respostas certas seguidas — o que você pode considerar aprendido. */
-  dominadas: number
+  /** Nunca vista. */
+  ineditas: number
 }
 
 export type Estudo = {
@@ -93,15 +97,18 @@ export function useEstudo(filtro: FiltroEstudo): Estudo {
     setQuestao(sortear(progressoAtual.current))
   }, [sortear])
 
-  const contadores = useMemo<Contadores>(
-    () => ({
-      total: candidatas.length,
-      ineditas: candidatas.filter((q) => (progresso[q.id]?.vistas ?? 0) === 0).length,
-      pendentes: candidatas.filter((q) => estaPendente(progresso[q.id])).length,
-      dominadas: candidatas.filter((q) => estaDominada(progresso[q.id])).length,
-    }),
-    [candidatas, progresso],
-  )
+  const contadores = useMemo<Contadores>(() => {
+    let aprendidas = 0
+    let pendentes = 0
+    let ineditas = 0
+    for (const q of candidatas) {
+      const p = progresso[q.id]
+      if ((p?.vistas ?? 0) === 0) ineditas++
+      else if (estaPendente(p)) pendentes++
+      else aprendidas++
+    }
+    return { total: candidatas.length, aprendidas, pendentes, ineditas }
+  }, [candidatas, progresso])
 
   return { questao, escolha, responder, avancar, contadores }
 }

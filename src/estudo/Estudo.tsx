@@ -19,7 +19,7 @@ export function Estudo({ filtro = {} }: { filtro?: FiltroEstudo }) {
     <section className="estudo">
       <header className="contadores" data-testid="contadores">
         <span>
-          <b>{contadores.dominadas}</b> aprendidas
+          <b>{contadores.aprendidas}</b> aprendidas
         </span>
         <span>
           <b>{contadores.pendentes}</b> a revisar
@@ -36,9 +36,9 @@ export function Estudo({ filtro = {} }: { filtro?: FiltroEstudo }) {
         className="barra"
         data-testid="barra-progresso"
         max={contadores.total}
-        value={contadores.dominadas}
+        value={contadores.aprendidas}
       >
-        {contadores.dominadas} de {contadores.total}
+        {contadores.aprendidas} de {contadores.total}
       </progress>
 
       <p className="enunciado" data-testid="enunciado">

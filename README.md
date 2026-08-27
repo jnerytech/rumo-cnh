@@ -7,8 +7,8 @@ Dois modos:
 
 - **Estudar** — varre as 1496 questões com fila de erros. O que você errou volta,
   e precisa de **dois acertos seguidos** para sair da fila (um acerto pode ser chute).
-  Contadores de **aprendidas / a revisar / inéditas** com barra de progresso, e botão de zerar
-  com confirmação em dois cliques.
+  Contadores de **aprendidas / a revisar / inéditas** que sempre somam o total — cada questão está
+  em exatamente um estado — com barra de progresso e botão de zerar com confirmação em dois cliques.
 - **Simulado** — 30 questões na proporção real do banco (8/4/13/5 por módulo),
   **sem revelar nada durante a prova**. No fim: nota, veredito contra o mínimo de
   24/30, e cada erro com sua resposta, a correta e o comentário. Errar aqui
