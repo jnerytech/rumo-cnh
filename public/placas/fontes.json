@@ -1,53 +1,347 @@
 {
-  "fonte": "Wikimedia Commons (Special:FilePath)",
+  "fonte": "Wikimedia Commons + 3 SVGs desenhados",
   "placas": {
-    "R-28": {
-      "arquivo_commons": "Brasil_R-28.svg",
-      "questoes": 8
+    "A-11a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-11a.svg",
+      "questoes": 1
     },
-    "R-7": {
-      "arquivo_commons": "Brasil_R-7.svg",
-      "questoes": 6
-    },
-    "R-6a": {
-      "arquivo_commons": "Brasil_R-6a.svg",
-      "questoes": 6
-    },
-    "R-5a": {
-      "arquivo_commons": "Brasil_R-5a.svg",
-      "questoes": 5
-    },
-    "A-31": {
-      "arquivo_commons": "Brasil_A-31.svg",
-      "questoes": 5
-    },
-    "A-15": {
-      "arquivo_commons": "Brasil_A-15.svg",
-      "questoes": 4
-    },
-    "R-25c": {
-      "arquivo_commons": "Brasil_R-25c.svg",
-      "questoes": 4
-    },
-    "R-38": {
-      "arquivo_commons": "Brasil_R-38.svg",
-      "questoes": 4
+    "A-12": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-12.svg",
+      "questoes": 3
     },
     "A-14": {
+      "origem": "Wikimedia Commons",
       "arquivo_commons": "Brasil_A-14.svg",
       "questoes": 4
     },
+    "A-15": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-15.svg",
+      "questoes": 4
+    },
+    "A-17": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-17.svg",
+      "questoes": 1
+    },
+    "A-18": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-18.svg",
+      "questoes": 3
+    },
+    "A-19": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-19.svg",
+      "questoes": 2
+    },
+    "A-1a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-1a.svg",
+      "questoes": 2
+    },
+    "A-1b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-1b.svg",
+      "questoes": 1
+    },
+    "A-20a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-20a.svg",
+      "questoes": 2
+    },
+    "A-20b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-20b.svg",
+      "questoes": 1
+    },
+    "A-2a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-2a.svg",
+      "questoes": 1
+    },
+    "A-2b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-2b.svg",
+      "questoes": 4
+    },
+    "A-31": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-31.svg",
+      "questoes": 5
+    },
+    "A-32a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-32a.svg",
+      "questoes": 3
+    },
+    "A-35": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-35.svg",
+      "questoes": 2
+    },
+    "A-39": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-39.svg",
+      "questoes": 1
+    },
+    "A-3a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-3a.svg",
+      "questoes": 1
+    },
+    "A-40": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-40.svg",
+      "questoes": 1
+    },
+    "A-41": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "1999_Brazil_road_sign_A-41.svg",
+      "questoes": 1
+    },
+    "A-42a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-42a.svg",
+      "questoes": 2
+    },
+    "A-42b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-42b.svg",
+      "questoes": 2
+    },
+    "A-42c": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-42c.svg",
+      "questoes": 2
+    },
+    "A-45": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-45.svg",
+      "questoes": 3
+    },
+    "A-4b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-4b.svg",
+      "questoes": 1
+    },
+    "A-5a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-5a.svg",
+      "questoes": 1
+    },
+    "A-6": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-6.svg",
+      "questoes": 3
+    },
+    "A-7a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-7a.svg",
+      "questoes": 2
+    },
+    "A-8": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-8.svg",
+      "questoes": 3
+    },
+    "A-9": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_A-9.svg",
+      "questoes": 1
+    },
+    "R-10": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-10.svg",
+      "questoes": 3
+    },
+    "R-14": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-14.svg",
+      "questoes": 3
+    },
+    "R-15": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-15.svg",
+      "questoes": 3
+    },
+    "R-16": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-16.svg",
+      "questoes": 1
+    },
+    "R-19": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "1999_Brazil_road_sign_R-19.svg",
+      "questoes": 1
+    },
+    "R-20": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-20.svg",
+      "questoes": 2
+    },
+    "R-23": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-23.svg",
+      "questoes": 2
+    },
+    "R-24a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-24a.svg",
+      "questoes": 3
+    },
+    "R-24b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-24b.svg",
+      "questoes": 2
+    },
+    "R-25a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-25a.svg",
+      "questoes": 3
+    },
+    "R-25b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-25b.svg",
+      "questoes": 3
+    },
+    "R-25c": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-25c.svg",
+      "questoes": 4
+    },
+    "R-25d": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-25d.svg",
+      "questoes": 2
+    },
+    "R-26": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-26.svg",
+      "questoes": 2
+    },
+    "R-27": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-27.svg",
+      "questoes": 3
+    },
+    "R-28": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-28.svg",
+      "questoes": 8
+    },
+    "R-29": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-29.svg",
+      "questoes": 3
+    },
+    "R-30": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-30.svg",
+      "questoes": 1
+    },
+    "R-31": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-31.svg",
+      "questoes": 1
+    },
     "R-32": {
+      "origem": "Wikimedia Commons",
       "arquivo_commons": "Brasil_R-32.svg",
       "questoes": 4
     },
+    "R-33": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-33.svg",
+      "questoes": 3
+    },
+    "R-34": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-34.svg",
+      "questoes": 2
+    },
+    "R-35": {
+      "origem": "desenhado à mão (padrão CONTRAN); não existe no Commons",
+      "questoes": 3
+    },
     "R-37": {
+      "origem": "Wikimedia Commons",
       "arquivo_commons": "Brasil_R-37.svg",
       "questoes": 4
     },
-    "A-2b": {
-      "arquivo_commons": "Brasil_A-2b.svg",
+    "R-38": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-38.svg",
       "questoes": 4
+    },
+    "R-39": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-39.svg",
+      "questoes": 3
+    },
+    "R-44": {
+      "origem": "desenhado à mão (padrão CONTRAN); não existe no Commons",
+      "questoes": 3
+    },
+    "R-4a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-4a.svg",
+      "questoes": 1
+    },
+    "R-4b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-4b.svg",
+      "questoes": 2
+    },
+    "R-5a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-5a.svg",
+      "questoes": 5
+    },
+    "R-5b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-5b.svg",
+      "questoes": 1
+    },
+    "R-6a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-6a.svg",
+      "questoes": 6
+    },
+    "R-6b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-6b.svg",
+      "questoes": 1
+    },
+    "R-6c": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-6c.svg",
+      "questoes": 2
+    },
+    "R-7": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-7.svg",
+      "questoes": 6
+    },
+    "R-8a": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-8a.svg",
+      "questoes": 3
+    },
+    "R-8b": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-8b.svg",
+      "questoes": 2
+    },
+    "R-9": {
+      "origem": "Wikimedia Commons",
+      "arquivo_commons": "Brasil_R-9.svg",
+      "questoes": 2
+    },
+    "SAU-06": {
+      "origem": "desenhado à mão (padrão CONTRAN); não existe no Commons",
+      "questoes": 1
     }
   }
 }
