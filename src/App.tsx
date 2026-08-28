@@ -4,6 +4,7 @@ import { Filtros } from './estudo/Filtros'
 import { registrarResposta } from './estudo/fila'
 import { carregarProgresso, salvarProgresso, zerarProgresso } from './estudo/persistencia'
 import type { FiltroEstudo } from './estudo/useEstudo'
+import { AvisoAtualizacao } from './pwa/AvisoAtualizacao'
 import { Resultado } from './simulado/Resultado'
 import { Simulado } from './simulado/Simulado'
 import { carregarHistorico, registrarProva, zerarHistorico, type Prova } from './simulado/historico'
@@ -69,6 +70,7 @@ export function App() {
 
   return (
     <>
+      <AvisoAtualizacao />
       <nav className="modos">
         <button
           type="button"

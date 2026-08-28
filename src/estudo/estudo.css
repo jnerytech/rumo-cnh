@@ -407,3 +407,17 @@ kbd {
     padding-left: 1rem;
   }
 }
+
+.aviso-atualizacao {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--borda);
+  background: var(--texto);
+  color: var(--fundo);
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  text-align: center;
+}

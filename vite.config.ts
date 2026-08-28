@@ -20,6 +20,11 @@ export default defineConfig({
         // 1,2 MB de questoes.json entram no bundle; o padrão do workbox corta em 2 MiB.
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         cleanupOutdatedCaches: true,
+        // Ativa só quando o usuário pede (skipWaiting via mensagem), mas quando
+        // ativa precisa reivindicar as páginas abertas. Sem isto o worker novo
+        // ativa, a página fica sem controlador e o recarregamento nunca acontece.
+        skipWaiting: false,
+        clientsClaim: true,
       },
       manifest: manifesto,
     }),

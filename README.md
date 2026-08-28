@@ -24,9 +24,14 @@ o app abre em tela cheia. Depois da primeira visita ele funciona **sem internet*
 questões viajam no bundle e as 69 placas ficam no cache do service worker. Verificado com a rede
 desligada: app carrega, placa renderiza, simulado abre, nenhuma requisição falha.
 
-A atualização é deliberadamente **não** automática: uma versão nova espera e entra quando você
-fecha e abre o app. Recarregar sozinho no meio de um simulado de 30 questões perderia a prova,
-porque o estado dela vive em memória.
+A atualização é deliberadamente **não** automática. Quando sai versão nova, aparece uma barra
+**"Nova versão disponível — atualizar"** no topo, e a troca só acontece quando você toca. Recarregar
+sozinho no meio de um simulado de 30 questões perderia a prova, porque o estado dela vive em
+memória.
+
+Sem tocar em nada, a versão nova entra na **segunda** vez que você abrir o app depois dela sair —
+é o atraso normal de service worker, medido: a primeira abertura ainda serve a versão antiga
+enquanto baixa a nova em segundo plano.
 
 ## Rodar
 
