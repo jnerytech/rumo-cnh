@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { manifesto } from './src/pwa/manifesto'
 
 export default defineConfig({
   // Relativo: o build precisa funcionar servido de um subcaminho, como
@@ -9,25 +10,18 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt' e não 'autoUpdate': com autoUpdate a página recarrega sozinha
+      // quando sai versão nova, e recarregar no meio de um simulado de 30
+      // questões perde a prova inteira — o estado da prova vive em memória.
+      // Assim a versão nova espera e entra quando o app for aberto de novo.
+      registerType: 'prompt',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,png,jpg,svg,webp}'],
+        globPatterns: ['**/*.{js,css,html,png,svg,webmanifest}'],
+        // 1,2 MB de questoes.json entram no bundle; o padrão do workbox corta em 2 MiB.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        cleanupOutdatedCaches: true,
       },
-      manifest: {
-        name: 'Rumo à CNH',
-        short_name: 'Rumo CNH',
-        description: 'Estude para a prova teórica da CNH com questões e simulados.',
-        theme_color: '#2563eb',
-        background_color: '#ffffff',
-        display: 'standalone',
-        orientation: 'portrait',
-        scope: './',
-        start_url: './',
-        icons: [
-          { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
-        ],
-      },
+      manifest: manifesto,
     }),
   ],
   // Porta travada: o progresso vive no localStorage, que é preso à origem.

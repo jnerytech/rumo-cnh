@@ -37,6 +37,7 @@ Valem para todos os módulos. As specs de módulo referenciam esta seção em ve
 | Lint / format | ESLint + Prettier |
 | Persistência | `localStorage` (progresso é pequeno: ids + contadores) |
 | Backend | nenhum |
+| PWA | vite-plugin-pwa (Workbox), instalável e offline |
 
 ## Commands
 
@@ -59,12 +60,14 @@ questoes.json           → fonte de dados (artefato de extração; ver QUESTOES
 CAPABILITY-MAP.md       → este arquivo
 SPEC-*.md               → spec por módulo
 docs/intent/            → intenção confirmada
+public/icon*.svg        → fonte dos ícones do PWA; os PNGs são derivados deles
 public/placas/          → SVGs das placas, nomeados pelo código (A-33a.svg)
 scripts/                → utilitários de build/checagem (cobertura de placas)
 src/dados/              → módulo dados (tipos, carregamento, embaralhamento, filtros, sorteio)
 src/placas/             → mapa código → asset e componente <Placa/>
 src/estudo/             → modo estudo
 src/simulado/           → modo simulado
+src/pwa/                → manifesto do PWA, testado (ícones e campos)
 src/ui/                 → componentes compartilhados
 src/App.tsx, main.tsx   → shell e roteamento entre os modos
 tasks/                  → plan.md e todo.md

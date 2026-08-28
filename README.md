@@ -17,8 +17,16 @@ Dois modos:
 **Teclado nos dois modos:** `A`–`D` ou `1`–`4` respondem, `Enter` avança (e finaliza a prova na
 última questão). Os atalhos ficam escritos na tela e somem em aparelho sem teclado.
 
-**No celular:** layout responsivo, alvos de toque de 44 px, sem rolagem horizontal. O app é uma
-página estática — abre no navegador do telefone pelo endereço publicado.
+**No celular:** layout responsivo, alvos de toque de 44 px, sem rolagem horizontal.
+
+**Instalável e offline (PWA).** No Chrome do Android, "Instalar app" põe um ícone na tela inicial e
+o app abre em tela cheia. Depois da primeira visita ele funciona **sem internet** — as 1496
+questões viajam no bundle e as 69 placas ficam no cache do service worker. Verificado com a rede
+desligada: app carrega, placa renderiza, simulado abre, nenhuma requisição falha.
+
+A atualização é deliberadamente **não** automática: uma versão nova espera e entra quando você
+fecha e abre o app. Recarregar sozinho no meio de um simulado de 30 questões perderia a prova,
+porque o estado dela vive em memória.
 
 ## Rodar
 
